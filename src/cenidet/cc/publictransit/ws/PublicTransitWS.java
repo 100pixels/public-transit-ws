@@ -3,14 +3,16 @@ package cenidet.cc.publictransit.ws;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import cenidet.cc.publictransit.dao.StopDAO;
-import cenidet.cc.publictransit.dto.*;
+import org.cenidet.cc.publictransit.dto.*;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+
+import org.cenidet.cc.publictransit.dao.StopDAO;
+import org.cenidet.cc.publictransit.dto.Stop;
 //import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -60,13 +62,13 @@ public class PublicTransitWS {
     	return Response.status(200).entity(jsonStop).build();
     }
     
-    
+    @Path("grafo")
 	@GET
 	@Produces("application/json")
-    public Response getAllDistinctStops() {
+    public Response getVerticesGrafo() {
         ArrayList<Stop> stops = null;
         try {
-            stops = stopDAO.getAllStops();
+            stops = stopDAO.getVerticesGrafo();
         } catch (SQLException e) {
             System.out.println("Exception: " + e.getMessage());
         }
